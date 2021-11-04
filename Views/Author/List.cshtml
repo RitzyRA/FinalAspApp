@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Authors List Page";
+}
+
+@model List<Author>
+
+<div class="text-center position-sticky sticky-top">
+    <table class="table table-striped align-middle">
+        <thead class="position-sticky sticky-top bg-white">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model)
+            {
+            <tr>
+                <th scope="row">@author.Id</th>
+                <td>@author.Name</td>
+                <td>@author.Surname</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Details", "Author", new { ID = author.Id })" role="button">Update</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Author", new { ID = author.Id })" role="button">Delete</a>
+                </td>
+            </tr>
+            }
+            <form method="post" asp-controller="Author" asp-action="Create">
+            <tr>
+                <th scope="row"> </th>
+                <td>
+                    <input class="form-control" type="text" name="name" placeholder="Name" required />
+                </td>
+                <td>
+                    <input class="form-control" type="text" name="surname" placeholder="Surname" />
+                </td>
+                <td>
+                    <input class="btn btn-primary" type="submit" value="Add Author" name="submit" />
+                </td>
+            </tr>
+            </form>
+        </tbody>
+    </table>
+</div>
+
